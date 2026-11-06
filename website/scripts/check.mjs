@@ -1,0 +1,13 @@
+import {readFile,access} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const html = await readFile('index.html','utf8');
+const js = await readFile('app.js','utf8');
+for (const match of html.matchAll(/(?:src|href|poster)="(\/[^"#]+)"/g)) await access(`.${match[1]}`);
+for (const theme of ['fern','paper','cobalt','rose']) await access(`assets/${theme}.webp`);
+assert.equal([...html.matchAll(/role="tab"/g)].length,9);
+assert.equal([...html.matchAll(/data-theme=/g)].length,4);
+assert(!/TODO|lorem ipsum|placeholder/i.test(html));
+assert(html.includes('prefers-reduced-motion') || js.includes('prefers-reduced-motion'));
+const video = await readFile('assets/demo.mp4');
+assert(video.length>10000 && video.subarray(4,8).toString()==='ftyp','Missing/invalid demo video');
+console.log('Verified local links, media, mode controls and theme assets.');

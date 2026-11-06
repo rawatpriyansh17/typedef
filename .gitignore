@@ -1,0 +1,9 @@
+/target
+*.tmp
+.DS_Store
+/website/dist/
+/website/node_modules/
+/website/.vercel/
+.env
+.env.*
+*.cast
