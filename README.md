@@ -6,7 +6,7 @@ Practice between commits, build a daily habit, and watch your typing improve. No
 
 ![typedef dashboard with personal records, practice modes and daily quests](website/assets/dashboard.png)
 
-[Contributing](CONTRIBUTING.md) · [Product research](docs/SOURCE_REVIEW.md)
+[Website](https://typedef-tui.vercel.app) · [Contributing](CONTRIBUTING.md) · [Product research](docs/SOURCE_REVIEW.md)
 
 ## Get started
 
