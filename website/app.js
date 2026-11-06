@@ -1,13 +1,13 @@
 const modes = {
-  time: ['◷','You vs. the clock.','15, 30, 60 or 120 seconds. Your first key starts the timer. Chase speed without losing accuracy.','tpdf --mode time --seconds 30'],
-  words: ['≡','Set your distance.','Choose a word count and take your time. The test ends when you reach the final character.','tpdf --mode words --words 50'],
-  quote: ['“','A little more character.','Practice complete passages with punctuation and capitals. Finish the quote to see your results.','tpdf --mode quote'],
-  endless: ['∞','No finish line.','Fresh words keep arriving. Follow your live stats and 50-word laps. Ctrl+D finishes and saves your run.','tpdf --mode endless'],
-  zen: ['◇','Turn down the noise.','Unlimited guided words in focus mode. No countdown or word limit. Ctrl+D finishes and saves.','tpdf --mode zen'],
-  daily: ['◈','Same day. Same challenge.','A 60-second test shared by UTC date and app version. A daily ritual, with no account required.','tpdf --mode daily'],
-  weak: ['⌁','Work on the tricky keys.','Train the characters you miss most. Your local error history selects words worth practicing.','tpdf --mode weak'],
-  custom: ['↥','Bring your own words.','Press O in the app to browse or paste a local file path. Text, notes, or source code. Nothing is uploaded.','tpdf --file notes.txt'],
-  code: ['{}','Keep the indentation.','Type bundled Rust, Python and JavaScript snippets. Enter adds a newline; Tab fills leading indentation.','tpdf --mode code']
+  time: ['◷','Timed practice','Choose 15, 30, 60 or 120 seconds. Your first key starts the timer.','tpdf --mode time --seconds 30'],
+  words: ['≡','Word count','Choose a word count and take your time. The test ends when you reach the final character.','tpdf --mode words --words 50'],
+  quote: ['“','Quotes','Practice complete passages with punctuation and capitals. Finish the quote to see your results.','tpdf --mode quote'],
+  endless: ['∞','Endless practice','Fresh words keep arriving. Follow your live stats and 50-word laps. Ctrl+D finishes and saves your run.','tpdf --mode endless'],
+  zen: ['◇','Focus mode','Unlimited guided words in focus mode. No countdown or word limit. Ctrl+D finishes and saves.','tpdf --mode zen'],
+  daily: ['◈','Daily challenge','A 60-second test with the same starting words for everyone using the same app version that day.','tpdf --mode daily'],
+  weak: ['⌁','Weak keys','Train the characters you miss most. Your local error history selects words worth practicing.','tpdf --mode weak'],
+  custom: ['↥','Your own text','Press O in the app to browse or paste a local file path. Text, notes, or source code. Nothing is uploaded.','tpdf --file notes.txt'],
+  code: ['{}','Code practice','Type bundled Rust, Python and JavaScript snippets. Enter adds a newline; Tab fills leading indentation.','tpdf --mode code']
 };
 const tabs = [...document.querySelectorAll('[data-mode]')];
 function selectMode(tab) {
@@ -36,11 +36,11 @@ function applyTheme(key, remember = false) {
   if (!Object.hasOwn(palettes, key)) key = 'fern';
   document.documentElement.dataset.palette = key;
   themeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.theme === key)));
-  const [name,number] = palettes[key];
+  const [name] = palettes[key];
   const image = document.querySelector('#theme-image');
   image.src = `/assets/${key}.webp`;
   image.alt = `typedef dashboard in the ${name} theme`;
-  document.querySelector('#theme-caption').textContent = `${name.toUpperCase()} / ${number} — Actual app capture`;
+  document.querySelector('#theme-caption').textContent = `${name} · app capture`;
   document.querySelector('meta[name="theme-color"]').content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
   if (remember) {
     try { localStorage.setItem('typedef-theme', key); } catch { /* Storage may be disabled. */ }
@@ -50,6 +50,19 @@ themeButtons.forEach(button => button.addEventListener('click', () => applyTheme
 let savedTheme = 'fern';
 try { savedTheme = localStorage.getItem('typedef-theme') || savedTheme; } catch { /* Use the default palette. */ }
 applyTheme(savedTheme);
+const installMethods = {
+  curl: ['curl -fsSL https://typedef-tui.vercel.app/install.sh | sh', 'macOS + Linux', 'Verifies SHA-256 and installs to ~/.local/bin. No sudo or shell profile changes.'],
+  brew: ['brew install rawatpriyansh17/tap/typedef', 'macOS + Linux · Homebrew', 'Installs both commands. Update later with brew upgrade typedef.'],
+  cargo: ['cargo install --git https://github.com/rawatpriyansh17/typedef --locked', 'All platforms · Rust required', 'Builds from source with Cargo. Use curl or Homebrew for prebuilt binaries.']
+};
+document.querySelectorAll('[data-install]').forEach(button => button.addEventListener('click', () => {
+  document.querySelectorAll('[data-install]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+  const [command,platform,note] = installMethods[button.dataset.install];
+  document.querySelector('#install-command').textContent = command;
+  document.querySelector('#install-platform').textContent = platform;
+  document.querySelector('#install-note').textContent = note;
+  document.querySelector('#copy-status').textContent = '';
+}));
 document.querySelector('#copy-command').addEventListener('click', async () => {
   const command = document.querySelector('#install-command').textContent;
   try {

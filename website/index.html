@@ -1,56 +1,90 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0a0e10">
-  <title>typedef — Fast, lightweight terminal typing practice</title>
-  <meta name="description" content="A fast, lightweight typing app for your terminal. Practice offline, improve your speed, and make it yours. Free and open source.">
-  <meta property="og:title" content="typedef — Type faster. In your terminal."><meta property="og:description" content="A fast, lightweight typing app. Practice offline. Free and open source."><meta property="og:type" content="website"><meta property="og:image" content="https://typedef-tui.vercel.app/assets/dashboard.png">
-  <link rel="canonical" href="https://typedef-tui.vercel.app/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101315">
+  <title>typedef — Typing practice in your terminal</title>
+  <meta name="description" content="A fast, lightweight terminal typing app. Practice offline with nine modes and 28 themes. Install with curl or Homebrew. Free and open source.">
+  <meta property="og:title" content="typedef — Typing practice in your terminal">
+  <meta property="og:description" content="Fast, lightweight, offline typing practice. Install with curl or Homebrew.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://typedef-tui.vercel.app/assets/dashboard.png">
   <meta property="og:url" content="https://typedef-tui.vercel.app/">
+  <link rel="canonical" href="https://typedef-tui.vercel.app/">
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/style.css?v=2"><script src="/app.js?v=2" defer></script>
+  <link rel="preload" href="/assets/fonts/orbitron.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=3">
+  <script src="/app.js?v=3" defer></script>
 </head>
-<body>
+<body id="top">
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav wrap">
-  <a class="brand" href="#" aria-label="typedef home"><span class="brand-mark" aria-hidden="true"></span>typedef<span class="cursor">_</span></a>
-  <nav aria-label="Main navigation"><a href="#practice">Practice</a><a href="#themes">Themes</a><a href="https://github.com/rawatpriyansh17/typedef">GitHub <span aria-hidden="true">↗</span></a></nav>
-  <a class="button small" href="#install">Get typedef <span aria-hidden="true">↙</span></a>
+  <a class="brand" href="#top" aria-label="typedef home"><span class="brand-mark" aria-hidden="true"></span>typedef<span class="cursor" aria-hidden="true">_</span></a>
+  <nav aria-label="Main navigation"><a href="#practice">Practice</a><a href="#themes">Themes</a><a href="https://github.com/rawatpriyansh17/typedef">GitHub ↗</a></nav>
+  <a class="button small" href="#install">Install <span aria-hidden="true">↗</span></a>
 </header>
 <main id="main">
-<section class="hero wrap">
+<section class="hero wrap" aria-labelledby="hero-heading">
   <div class="hero-copy">
-    <p class="eyebrow"><span class="status-dot"></span> TYPEDEF / TYPING PRACTICE</p>
-    <h1>Type faster.<br>In your <em>terminal.</em></h1>
-    <p class="intro">A fast, lightweight typing app.<br>Open your terminal. Practice offline.</p>
-    <div class="hero-actions"><a class="button" href="#install">Start typing <span aria-hidden="true">↗</span></a><a class="text-link" href="#demo">See it in motion <span aria-hidden="true">↓</span></a></div>
-    <p class="meta">FREE & OPEN SOURCE <span>·</span> BUILT WITH RUST</p>
+    <a class="release-link" href="https://github.com/rawatpriyansh17/typedef/releases/tag/v0.5.2"><span class="key-label">tpdf</span> v0.5.2 <span aria-hidden="true">↗</span></a>
+    <h1 id="hero-heading">Type faster.<br><span>In your terminal.</span></h1>
   </div>
-  <div class="key-art" aria-hidden="true"><div class="orb"></div><div class="orbit one"></div><div class="orbit two"></div><div class="keycap">t<span>typedef</span></div><div class="satellite s1">esc</div><div class="satellite s2">↵</div><span class="coord">INPUT → PROGRESS</span><span class="coord bottom">01 / KEEP GOING</span></div>
+  <div class="hero-summary">
+    <p class="intro">A fast, lightweight typing app.<br>Built in Rust. Ready to use offline.</p>
+    <a class="button" href="#install">Install typedef <span aria-hidden="true">↗</span></a>
+    <p class="meta">Free and open source · macOS, Linux, Windows</p>
+  </div>
 </section>
-<section class="demo-section wrap" id="demo" aria-labelledby="demo-heading">
-  <div class="section-line"><h2 id="demo-heading">No browser required.</h2><span class="mono">01 — THE APP</span></div>
-  <div class="terminal"><div class="terminal-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>tpdf — practice</span><span class="live-tag">LOCAL SESSION</span></div>
-    <video id="demo-video" controls muted loop playsinline preload="metadata" poster="/assets/typing.webp" width="1200" height="720" aria-label="Demonstration of typedef typing practice and results"><source src="/assets/demo.mp4" type="video/mp4">Your browser cannot play this video. <a href="/assets/demo.mp4">Download the app demo.</a></video>
+<section class="demo-section wrap" id="demo" aria-label="App demonstration">
+  <div class="terminal">
+    <div class="terminal-bar"><code><span aria-hidden="true">❯ </span>tpdf --mode time --seconds 15</code><span>15 second test</span></div>
+    <video id="demo-video" controls muted loop playsinline preload="metadata" poster="/assets/typing.webp" width="1200" height="720" aria-label="typedef typing practice and results demonstration"><source src="/assets/demo.mp4" type="video/mp4">Your browser cannot play this video. <a href="/assets/demo.mp4">Download the demo</a></video>
   </div>
-  <div class="demo-caption"><span>Actual app UI. Automated typing demo.</span><button class="quiet-button" id="motion-toggle" type="button">Play demo <span aria-hidden="true">▷</span></button></div>
-  <div class="facts"><span><b>09</b> ways to practice</span><span><b>28</b> palettes to make it yours</span><span><b>∞</b> room to improve</span></div>
+  <div class="demo-caption"><span>Actual app capture · automated demo</span><button class="quiet-button" id="motion-toggle" type="button">Play demo ▷</button></div>
 </section>
 <section class="practice wrap section" id="practice" aria-labelledby="practice-heading">
-  <div class="section-intro"><p class="eyebrow">02 — PICK YOUR PACE</p><h2 id="practice-heading">A quick sprint.<br>Or no finish line.</h2><p>Beat the clock, work on weak keys, or bring your own words. Start with one good session.</p></div>
+  <div class="section-intro"><p class="section-label"><span>01</span> Practice</p><h2 id="practice-heading">Choose your<br>next session</h2><p>Run a quick test, train difficult keys, or type your own text.</p><p class="key-hint"><kbd>Enter</kbd> start <kbd>Esc</kbd> home</p></div>
   <div class="mode-console"><div class="mode-tabs" role="tablist" aria-label="Practice modes">
-    <button id="tab-time" role="tab" aria-selected="true" aria-controls="mode-panel" data-mode="time">01 Time</button><button id="tab-words" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="words">02 Words</button><button id="tab-quote" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="quote">03 Quote</button><button id="tab-endless" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="endless">04 Endless</button><button id="tab-zen" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="zen">05 Zen</button><button id="tab-daily" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="daily">06 Daily</button><button id="tab-weak" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="weak">07 Weak keys</button><button id="tab-custom" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="custom">08 Custom</button><button id="tab-code" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="code">09 Code</button>
-  </div><div id="mode-panel" role="tabpanel" aria-labelledby="tab-time" tabindex="0"><span id="mode-symbol" aria-hidden="true">◷</span><h3 id="mode-title">You vs. the clock.</h3><p id="mode-description">15, 30, 60 or 120 seconds. Your first key starts the timer. Chase speed without losing accuracy.</p><code id="mode-command">tpdf --mode time --seconds 30</code></div></div>
+    <button id="tab-time" role="tab" aria-selected="true" aria-controls="mode-panel" data-mode="time">Time</button>
+    <button id="tab-words" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="words">Words</button>
+    <button id="tab-quote" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="quote">Quote</button>
+    <button id="tab-endless" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="endless">Endless</button>
+    <button id="tab-zen" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="zen">Zen</button>
+    <button id="tab-daily" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="daily">Daily</button>
+    <button id="tab-weak" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="weak">Weak keys</button>
+    <button id="tab-custom" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="custom">Custom</button>
+    <button id="tab-code" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="code">Code</button>
+  </div><div id="mode-panel" role="tabpanel" aria-labelledby="tab-time" tabindex="0"><span id="mode-symbol" aria-hidden="true">◷</span><h3 id="mode-title">Timed practice</h3><p id="mode-description">Choose 15, 30, 60 or 120 seconds. Your first key starts the timer.</p><code id="mode-command">tpdf --mode time --seconds 30</code></div></div>
 </section>
 <section class="themes-section section" id="themes" aria-labelledby="themes-heading"><div class="wrap">
-  <div class="section-line"><div><p class="eyebrow">03 — MAKE IT YOURS</p><h2 id="themes-heading">Your keys. Your colors.</h2></div><p class="muted">Try five here. Find 28 in the app.</p></div>
-  <div class="theme-switcher" role="group" aria-label="Featured app themes"><button type="button" data-theme="fern" aria-pressed="true"><i style="--swatch:#a2e097"></i>Fern</button><button type="button" data-theme="cobalt" aria-pressed="false"><i style="--swatch:#72b5ff"></i>Cobalt</button><button type="button" data-theme="rose" aria-pressed="false"><i style="--swatch:#f5a5c7"></i>Rose</button><button type="button" data-theme="ember" aria-pressed="false"><i style="--swatch:#ffae72"></i>Ember</button><button type="button" data-theme="paper" aria-pressed="false"><i style="--swatch:#efebe1"></i>Paper</button></div>
-  <figure class="theme-stage"><img id="theme-image" src="/assets/fern.webp" alt="typedef dashboard in the Fern theme" width="1200" height="720" loading="lazy"><figcaption id="theme-caption">FERN / 01 — Actual app capture</figcaption></figure>
-  <p class="theme-note">Pick a color. The whole page follows.</p>
+  <div class="section-line"><div><p class="section-label"><span>02</span> Appearance</p><h2 id="themes-heading">Pick your palette</h2></div><p class="muted">Five to try here. 28 in the app.</p></div>
+  <div class="theme-switcher" role="group" aria-label="App and website theme">
+    <button type="button" data-theme="fern" aria-pressed="true"><i style="--swatch:#a2e097"></i>Fern</button>
+    <button type="button" data-theme="cobalt" aria-pressed="false"><i style="--swatch:#72b5ff"></i>Cobalt</button>
+    <button type="button" data-theme="rose" aria-pressed="false"><i style="--swatch:#f5a5c7"></i>Rose</button>
+    <button type="button" data-theme="ember" aria-pressed="false"><i style="--swatch:#ffae72"></i>Ember</button>
+    <button type="button" data-theme="paper" aria-pressed="false"><i style="--swatch:#efebe1"></i>Paper</button>
+  </div>
+  <figure class="theme-stage"><img id="theme-image" src="/assets/fern.webp" alt="typedef dashboard in the Fern theme" width="1200" height="720" loading="lazy"><figcaption id="theme-caption">Fern · app capture</figcaption></figure>
 </div></section>
-<section class="journey wrap section" aria-labelledby="journey-heading"><div class="journey-copy"><p class="eyebrow">04 — KEEP THE STREAK ALIVE</p><h2 id="journey-heading">No last level.</h2><p>Personal records you can beat. Six badge tracks that keep opening new tiers. A reason to come back tomorrow.</p><div class="track-labels"><span>◇ Rhythm</span><span>◇ Precision</span><span>◇ Flawless</span><span>◇ Endurance</span><span>◇ Ritual</span><span>◇ Syntax</span></div><p class="meta">YOUR HISTORY STAYS ON YOUR MACHINE.</p></div><figure class="journey-image"><img src="/assets/journey.webp" alt="typedef Journey showing six repeating badge tracks and progress toward their next tiers" width="1200" height="720" loading="lazy"><figcaption>Earn the tier. Unlock the next.</figcaption></figure></section>
-<section class="install section" id="install" aria-labelledby="install-heading"><div class="wrap install-inner"><div><p class="eyebrow">05 — YOUR TURN</p><h2 id="install-heading">Meet your new<br>terminal habit<span class="accent">_</span></h2><p>One install. Two commands: <code>tpdf</code> or <code>typedef</code>.</p></div><div class="install-box"><p class="install-step"><span>01</span> Install stable Rust from <a href="https://rustup.rs">rustup.rs ↗</a></p><div class="command-label"><span><b>02</b> INSTALL FROM SOURCE</span><button type="button" id="copy-command" aria-label="Copy installation command">Copy <span aria-hidden="true">⧉</span></button></div><pre><code id="install-command">cargo install --git https://github.com/rawatpriyansh17/typedef --locked</code></pre><p class="install-step"><span>03</span> Open a terminal. Run <code>tpdf</code>.</p><p id="copy-status" role="status" aria-live="polite"></p></div></div></section>
+<section class="journey wrap section" aria-labelledby="journey-heading">
+  <div class="journey-copy"><p class="section-label"><span>03</span> Progress</p><h2 id="journey-heading">Watch your<br>practice add up</h2><p>Track personal records, accuracy and daily streaks. Keep earning levels and new badge tiers.</p><p class="meta">Your history stays on your machine</p></div>
+  <figure class="journey-image"><img src="/assets/journey.webp" alt="typedef Journey with six repeating badge tracks and progress toward the next tiers" width="1200" height="720" loading="lazy"><figcaption>Six badge tracks, with no final tier</figcaption></figure>
+</section>
+<section class="install section" id="install" aria-labelledby="install-heading"><div class="wrap install-inner">
+  <div><p class="section-label"><span>04</span> Install</p><h2 id="install-heading">One command.<br>Then <span class="accent">tpdf</span></h2><p>Prebuilt binaries. No Rust toolchain needed.</p><a class="text-link" href="https://github.com/rawatpriyansh17/typedef/releases/latest">Windows ZIPs and all downloads ↗</a></div>
+  <div class="install-box">
+    <div class="install-methods" role="group" aria-label="Installation method"><button type="button" data-install="curl" aria-pressed="true">curl</button><button type="button" data-install="brew" aria-pressed="false">Homebrew</button><button type="button" data-install="cargo" aria-pressed="false">Cargo</button></div>
+    <div class="command-label"><span id="install-platform">macOS + Linux</span><button type="button" id="copy-command" aria-label="Copy installation command">Copy</button></div>
+    <pre><code id="install-command">curl -fsSL https://typedef-tui.vercel.app/install.sh | sh</code></pre>
+    <p id="install-note">Verifies SHA-256 and installs to ~/.local/bin. No sudo or shell profile changes.</p>
+    <div class="install-next"><span>Start a session</span><code>tpdf <span aria-hidden="true">↵</span></code></div>
+    <p id="copy-status" role="status" aria-live="polite"></p>
+  </div>
+</div></section>
 </main>
-<footer class="wrap"><a class="brand" href="#"><span class="brand-mark" aria-hidden="true"></span>typedef</a><span>Built in Rust. Open to contribution.</span><div><a href="https://github.com/rawatpriyansh17/typedef#readme">Source ↗</a><a href="https://github.com/rawatpriyansh17/typedef/blob/main/CONTRIBUTING.md">Contribute Rust ↗</a><a href="https://github.com/rawatpriyansh17/typedef/blob/main/LICENSE">MIT</a></div></footer>
-</body></html>
+<footer class="wrap"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>typedef</a><span>Rust + Ratatui</span><div><a href="https://github.com/rawatpriyansh17/typedef">Source ↗</a><a href="https://github.com/rawatpriyansh17/typedef/blob/main/CONTRIBUTING.md">Contribute ↗</a><a href="https://github.com/rawatpriyansh17/typedef/blob/main/LICENSE">MIT</a></div></footer>
+</body>
+</html>

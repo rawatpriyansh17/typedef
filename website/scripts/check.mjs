@@ -6,6 +6,14 @@ for (const match of html.matchAll(/(?:src|href|poster)="(\/[^"#]+)"/g)) await ac
 for (const theme of ['fern','paper','cobalt','rose','ember']) await access(`assets/${theme}.webp`);
 assert.equal([...html.matchAll(/role="tab"/g)].length,9);
 assert.equal([...html.matchAll(/data-theme=/g)].length,5);
+assert.equal([...html.matchAll(/data-install=/g)].length,3);
+const installer = await readFile('../scripts/install.sh','utf8');
+const version = JSON.parse(await readFile('package.json','utf8')).version;
+assert(installer.includes(`TYPEDEF_VERSION:-v${version}`),'Website and installer versions must match');
+assert(html.includes(`releases/tag/v${version}`),'Release link must match the package version');
+assert(html.includes('https://typedef-tui.vercel.app/install.sh | sh'));
+assert(js.includes('brew install rawatpriyansh17/tap/typedef'));
+assert(!/No browser required/i.test(html));
 assert(!/TODO|lorem ipsum|placeholder/i.test(html));
 assert(html.includes('prefers-reduced-motion') || js.includes('prefers-reduced-motion'));
 const video = await readFile('assets/demo.mp4');
