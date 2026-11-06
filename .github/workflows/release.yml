@@ -31,10 +31,10 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
+      # Use Rust's bundled musl runtime and CRT together. A distro musl-gcc
+      # can mix incompatible runtime versions and produce startup crashes.
       - if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y musl-tools
-      - if: runner.os == 'Linux'
-        run: echo 'RUSTFLAGS=-C linker=musl-gcc' >> "$GITHUB_ENV"
+        run: echo 'RUSTFLAGS=-C link-self-contained=yes' >> "$GITHUB_ENV"
       - run: cargo test --locked --target ${{ matrix.target }}
       - run: cargo build --release --locked --target ${{ matrix.target }}
       - name: Verify packaged commands
@@ -42,6 +42,11 @@ jobs:
         run: |
           target/${{ matrix.target }}/release/typedef --version
           target/${{ matrix.target }}/release/tpdf --help
+      - name: Exercise release binary in a real terminal
+        if: runner.os != 'Windows'
+        env:
+          TYPEDEF_BINARY: target/${{ matrix.target }}/release/typedef
+        run: python3 scripts/pty_smoke.py
       - run: python scripts/package_release.py ${{ matrix.target }}
       - uses: actions/upload-artifact@v4
         with:

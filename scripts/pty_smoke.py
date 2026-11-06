@@ -12,7 +12,7 @@ import tempfile
 import termios
 import time
 
-BINARY = str(Path(__file__).resolve().parents[1] / "target/release/typedef")
+BINARY = os.environ.get("TYPEDEF_BINARY", str(Path(__file__).resolve().parents[1] / "target/release/typedef"))
 
 
 def read_for(fd, seconds):

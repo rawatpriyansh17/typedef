@@ -24,7 +24,7 @@ class InstallerTests(unittest.TestCase):
 import os, pathlib, shutil, sys
 if os.environ.get('TEST_DOWNLOAD_FAIL'): sys.exit(22)
 url = next(arg for arg in sys.argv if arg.startswith('https://'))
-assert url.startswith('https://github.com/rawatpriyansh17/typedef/releases/download/v0.5.1/')
+assert url.startswith('https://github.com/rawatpriyansh17/typedef/releases/download/v0.5.2/')
 source = pathlib.Path(os.environ['TEST_ARTIFACTS']) / url.rsplit('/', 1)[-1]
 shutil.copyfile(source, sys.argv[sys.argv.index('-o') + 1])
 ''')
@@ -32,13 +32,13 @@ shutil.copyfile(source, sys.argv[sys.argv.index('-o') + 1])
             tool.chmod(0o755)
         self.env = dict(os.environ, PATH=f"{mock}:{os.environ['PATH']}", TYPEDEF_INSTALL_DIR=str(self.bin), TEST_ARTIFACTS=str(self.root))
         self.env.pop("TYPEDEF_VERSION", None)
-        self.archive = self.root / "typedef-v0.5.1-x86_64-unknown-linux-musl.tar.gz"
+        self.archive = self.root / "typedef-v0.5.2-x86_64-unknown-linux-musl.tar.gz"
         self.make_archive(self.archive)
 
     def make_archive(self, path):
         with tarfile.open(path, "w:gz") as bundle:
             for name in ["typedef", "tpdf"]:
-                content = b'#!/bin/sh\nprintf "typedef 0.5.1\\n"\n'
+                content = b'#!/bin/sh\nprintf "typedef 0.5.2\\n"\n'
                 member = tarfile.TarInfo(name)
                 member.mode = 0o755
                 member.size = len(content)
@@ -56,7 +56,7 @@ shutil.copyfile(source, sys.argv[sys.argv.index('-o') + 1])
         for _ in range(2):
             result = self.run_installer()
             self.assertEqual(result.returncode, 0, result.stderr)
-            self.assertIn("0.5.1", subprocess.check_output([self.bin / "tpdf", "--version"], text=True))
+            self.assertIn("0.5.2", subprocess.check_output([self.bin / "tpdf", "--version"], text=True))
         self.assertEqual(unrelated.read_text(), "keep me")
         self.assertFalse((self.bin / "tpdf").is_symlink())
 
@@ -89,7 +89,7 @@ shutil.copyfile(source, sys.argv[sys.argv.index('-o') + 1])
             ("Linux", "aarch64", "aarch64-unknown-linux-musl"),
         ]:
             self.env.update(TEST_OS=system, TEST_ARCH=machine)
-            self.make_archive(self.root / f"typedef-v0.5.1-{target}.tar.gz")
+            self.make_archive(self.root / f"typedef-v0.5.2-{target}.tar.gz")
             result = self.run_installer()
             self.assertEqual(result.returncode, 0, result.stderr)
 

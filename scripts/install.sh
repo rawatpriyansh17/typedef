@@ -3,7 +3,7 @@
 set -eu
 
 main() {
-    version=${TYPEDEF_VERSION:-v0.5.1}
+    version=${TYPEDEF_VERSION:-v0.5.2}
     bin_dir=${TYPEDEF_INSTALL_DIR:-${HOME:?HOME is not set}/.local/bin}
     while [ "$#" -gt 0 ]; do
         case "$1" in
@@ -13,14 +13,14 @@ main() {
                 shift 2 ;;
             --help|-h)
                 printf '%s\n' 'Install typedef and tpdf from verified GitHub release binaries.' \
-                    'Usage: sh install.sh [--version v0.5.1] [--bin-dir PATH]' \
+                    'Usage: sh install.sh [--version v0.5.2] [--bin-dir PATH]' \
                     'Default directory: ~/.local/bin. No sudo or shell configuration changes.'
                 return ;;
             *) printf 'Unknown argument: %s\n' "$1" >&2; exit 1 ;;
         esac
     done
     printf '%s\n' "$version" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$' || {
-        printf '%s\n' 'Version must look like v0.5.1' >&2; exit 1;
+        printf '%s\n' 'Version must look like v0.5.2' >&2; exit 1;
     }
     case "$bin_dir" in /*) ;; *) printf '%s\n' 'Install directory must be an absolute path' >&2; exit 1 ;; esac
     for tool in curl tar mktemp uname; do

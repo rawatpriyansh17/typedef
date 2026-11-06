@@ -1,8 +1,8 @@
 # typedef
 
-A customizable terminal typing application, built with Rust and Ratatui.
+Fast, lightweight typing practice in your terminal. Built with Rust and Ratatui.
 
-Practice between commits, build a daily habit, and watch your typing improve. No account, telemetry, browser, or special font required. This is an early, working **0.5.0** release; it does not yet have full Monkeytype parity.
+Practice offline, build a daily habit, and track your speed and accuracy. **v0.5.2** includes nine practice modes, 28 themes, personal records, and an endless progression system. Free and open source.
 
 ![typedef dashboard with personal records, practice modes and daily quests](website/assets/dashboard.png)
 
@@ -10,24 +10,57 @@ Practice between commits, build a daily habit, and watch your typing improve. No
 
 ## Get started
 
-Install stable Rust from [rustup.rs](https://rustup.rs), then install directly from GitHub:
+### macOS and Linux — one command
+
+```sh
+curl -fsSL https://typedef-tui.vercel.app/install.sh | sh
+```
+
+Then run `tpdf`. Both `tpdf` and `typedef` open the same app and share your profile.
+
+The [installer](scripts/install.sh) detects Apple Silicon/Intel macOS or ARM64/x86-64 Linux, downloads a prebuilt binary, verifies its SHA-256 checksum, and installs both commands in `~/.local/bin`. It needs `curl`, `tar`, and `shasum` or `sha256sum`; **Rust and sudo are not required**. It does not change your shell configuration. If `tpdf` is not found, run `~/.local/bin/tpdf` or add this to your shell configuration:
+
+```sh
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+To choose another directory or pin a release:
+
+```sh
+curl -fsSL https://typedef-tui.vercel.app/install.sh | sh -s -- --bin-dir "$HOME/bin" --version v0.5.2
+```
+
+Re-run the install command to update. Remove the two installed executables to uninstall; your saved profile remains untouched.
+
+### Homebrew
+
+```sh
+brew install rawatpriyansh17/tap/typedef
+```
+
+This uses the project's [public Homebrew tap](https://github.com/rawatpriyansh17/homebrew-tap) and the same prebuilt releases. It supports macOS and Linux on Apple Silicon/ARM64 and Intel/x86-64. Update with `brew update && brew upgrade typedef`; uninstall with `brew uninstall typedef`.
+
+### Windows and direct downloads
+
+Download the archive for your OS and CPU from [GitHub Releases](https://github.com/rawatpriyansh17/typedef/releases/latest). Windows x86-64 users: extract the ZIP, run `tpdf.exe` in a terminal, and optionally add its folder to PATH. Every archive has a `.sha256` checksum; the release also includes `SHA256SUMS`. macOS binaries target macOS 11 or newer; Linux binaries use a static musl runtime.
+
+### Build from source
+
+Contributors and other platforms can install stable Rust from [rustup.rs](https://rustup.rs), then:
 
 ```sh
 cargo install --git https://github.com/rawatpriyansh17/typedef --locked
 tpdf
 ```
 
-Both `tpdf` and `typedef` launch the same app and share your profile. Cargo places both executables in `~/.cargo/bin` (Windows: `%USERPROFILE%\.cargo\bin`). If your shell cannot find them, open a new terminal or add that directory to your PATH. On Unix with rustup, `source "$HOME/.cargo/env"` updates the current shell.
-
-To build a local checkout instead:
+Cargo installs both commands into `~/.cargo/bin` (Windows: `%USERPROFILE%\.cargo\bin`). For a local checkout:
 
 ```sh
 git clone https://github.com/rawatpriyansh17/typedef.git
 cd typedef
 cargo run --release
-# Or install the executable into ~/.cargo/bin:
+# Install your local build:
 cargo install --path . --locked
-typedef
 ```
 
 Choose a mode with arrow keys and press Enter. The timer starts on your first character. Start with 30 seconds, focus on accuracy, and set a daily session goal in Settings.
@@ -173,7 +206,7 @@ Keyboard diagrams are visual guides and do not change your OS input layout. Next
 
 ## Current limits
 
-Use an 80×24 or larger true-color terminal for the best layout. Very small terminals show a resize prompt. Built-in content is English; Unicode files work at the scalar-value level, but grapheme clusters, combining accents, RTL scripts, and IME composition need more work. Code mode currently chooses from a small bundled set. Weak-key practice targets errors, not per-key latency. Zen is guided text, not free writing. There is no account sync, multiplayer, plugin execution, or online ranking yet. Linux and Windows CI is configured; local interactive validation was on macOS. Endless sessions have no designed endpoint, but retain their text and statistics in memory; long-session memory optimization remains on the roadmap.
+Use an 80×24 or larger true-color terminal for the best layout. Very small terminals show a resize prompt. Built-in content is English; Unicode files work at the scalar-value level, but grapheme clusters, combining accents, RTL scripts, and IME composition need more work. Code mode currently chooses from a small bundled set. Weak-key practice targets errors, not per-key latency. Zen is guided text, not free writing. There is no account sync, multiplayer, plugin execution, or online ranking yet. Release builds and Rust tests run on macOS and Linux (ARM64 and x86-64), and Windows x86-64. Interactive terminal checks run on macOS and Linux; local visual validation was on macOS. Endless sessions have no designed endpoint, but retain their text and statistics in memory; long-session memory optimization remains on the roadmap.
 
 MIT licensed. Bundled prose, snippets, and the word list were authored for this project; no competitor code or datasets were copied.
 
