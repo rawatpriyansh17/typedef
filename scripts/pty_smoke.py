@@ -186,7 +186,10 @@ with tempfile.TemporaryDirectory(prefix="typedef-smoke-") as directory:
         os.write(master, b"\r")
         read_for(master, 0.1)
         os.write(master, b"a")
-        read_for(master, 1.25)
+        # Wait for the observable save, not an assumed CI scheduling latency.
+        deadline = time.monotonic() + 5
+        while not (root / "timed/profile.json").exists() and time.monotonic() < deadline:
+            read_for(master, 0.1)
         record = json.loads((root / "timed/profile.json").read_text())["history"]
         assert len(record) == 1 and record[0]["seconds"] == 1.0
     finally:
