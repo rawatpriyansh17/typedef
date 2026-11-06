@@ -1,19 +1,21 @@
 const modes = {
-  time: ['◷','Timed practice','Choose 15, 30, 60 or 120 seconds. Your first key starts the timer.','tpdf --mode time --seconds 30'],
-  words: ['≡','Word count','Choose a word count and take your time. The test ends when you reach the final character.','tpdf --mode words --words 50'],
-  quote: ['“','Quotes','Practice complete passages with punctuation and capitals. Finish the quote to see your results.','tpdf --mode quote'],
-  endless: ['∞','Endless practice','Fresh words keep arriving. Follow your live stats and 50-word laps. Ctrl+D finishes and saves your run.','tpdf --mode endless'],
-  zen: ['◇','Focus mode','Unlimited guided words in focus mode. No countdown or word limit. Ctrl+D finishes and saves.','tpdf --mode zen'],
-  daily: ['◈','Daily challenge','A 60-second test with the same starting words for everyone using the same app version that day.','tpdf --mode daily'],
-  weak: ['⌁','Weak keys','Train the characters you miss most. Your local error history selects words worth practicing.','tpdf --mode weak'],
-  custom: ['↥','Your own text','Press O in the app to browse or paste a local file path. Text, notes, or source code. Nothing is uploaded.','tpdf --file notes.txt'],
-  code: ['{}','Code practice','Type bundled Rust, Python and JavaScript snippets. Enter adds a newline; Tab fills leading indentation.','tpdf --mode code']
+  time: ['Timed practice','Choose 15, 30, 60 or 120 seconds. Your first key starts the timer.','tpdf --mode time --seconds 30'],
+  words: ['Word count','Choose a word count and take your time. The test ends when you reach the final character.','tpdf --mode words --words 50'],
+  quote: ['Quotes','Practice complete passages with punctuation and capitals. Finish the quote to see your results.','tpdf --mode quote'],
+  endless: ['Endless practice','Fresh words keep arriving. Follow your live stats and 50-word laps. Ctrl+D finishes and saves your run.','tpdf --mode endless'],
+  zen: ['Focus mode','Unlimited guided words in focus mode. No countdown or word limit. Ctrl+D finishes and saves.','tpdf --mode zen'],
+  daily: ['Daily challenge','A 60-second test with the same starting words for everyone using the same app version that day.','tpdf --mode daily'],
+  weak: ['Weak keys','Train the characters you miss most. Your local error history selects words worth practicing.','tpdf --mode weak'],
+  custom: ['Your own text','Press O in the app to browse or paste a local file path. Text, notes, or source code. Nothing is uploaded.','tpdf --file notes.txt'],
+  code: ['Code practice','Type bundled Rust, Python and JavaScript snippets. Enter adds a newline; Tab fills leading indentation.','tpdf --mode code']
 };
 const tabs = [...document.querySelectorAll('[data-mode]')];
 function selectMode(tab) {
   tabs.forEach(item => { item.setAttribute('aria-selected', String(item === tab)); item.tabIndex = item === tab ? 0 : -1; });
-  const [symbol,title,description,command] = modes[tab.dataset.mode];
-  document.querySelector('#mode-symbol').textContent = symbol;
+  const [title,description,command] = modes[tab.dataset.mode];
+  const image = document.querySelector('#mode-image');
+  image.src = `/assets/mode-${tab.dataset.mode}.webp`;
+  image.alt = `${title} in typedef`;
   document.querySelector('#mode-title').textContent = title;
   document.querySelector('#mode-description').textContent = description;
   document.querySelector('#mode-command').textContent = command;
@@ -30,17 +32,17 @@ tabs.forEach((tab,index) => {
     if (next !== undefined) { event.preventDefault(); selectMode(tabs[next]); tabs[next].focus(); }
   });
 });
-const palettes = {fern:['Fern','01'],cobalt:['Cobalt','14'],rose:['Rose','15'],ember:['Ember','06'],paper:['Paper','02']};
+const palettes = {"fern": "Fern", "cobalt": "Cobalt", "rose": "Rose", "ember": "Ember", "moon": "Moon", "carbon": "Carbon", "tide": "Tide", "aurora": "Aurora", "ink": "Ink", "paper": "Paper", "glacier": "Glacier", "lavender": "Lavender"};
 const themeButtons = [...document.querySelectorAll('[data-theme]')];
 function applyTheme(key, remember = false) {
   if (!Object.hasOwn(palettes, key)) key = 'fern';
   document.documentElement.dataset.palette = key;
   themeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.theme === key)));
-  const [name] = palettes[key];
+  const name = palettes[key];
   const image = document.querySelector('#theme-image');
   image.src = `/assets/${key}.webp`;
   image.alt = `typedef dashboard in the ${name} theme`;
-  document.querySelector('#theme-caption').textContent = `${name} · app capture`;
+  document.querySelector('#theme-current').textContent = `${name} theme`;
   document.querySelector('meta[name="theme-color"]').content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
   if (remember) {
     try { localStorage.setItem('typedef-theme', key); } catch { /* Storage may be disabled. */ }
@@ -78,7 +80,10 @@ const video = document.querySelector('#demo-video');
 const toggle = document.querySelector('#motion-toggle');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let manualPause = false;
-function syncVideoButton() { toggle.textContent = video.paused ? 'Play demo ▷' : 'Pause demo Ⅱ'; }
+function syncVideoButton() {
+  toggle.querySelector('span').textContent = video.paused ? 'Play demo' : 'Pause demo';
+  toggle.querySelector('use').setAttribute('href', `/assets/icons.svg#${video.paused ? 'play' : 'pause'}`);
+}
 video.addEventListener('play',syncVideoButton); video.addEventListener('pause',syncVideoButton);
 toggle.addEventListener('click', () => { if (video.paused) { manualPause=false; video.play().catch(syncVideoButton); } else { manualPause=true; video.pause(); } });
 if ('IntersectionObserver' in window) {

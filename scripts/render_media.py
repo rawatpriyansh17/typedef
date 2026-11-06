@@ -2,11 +2,14 @@
 First: TYPEDEF_SNAPSHOT=1 cargo test --lib capture_site_media -- --ignored
 Requires Pillow and FFmpeg (or imageio-ffmpeg). No user profile is accessed.
 """
-import json, re, os, shutil, subprocess, tempfile
+import argparse, json, re, os, shutil, subprocess, tempfile
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'website/assets'
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--only', nargs='+', help='Render named screenshots only, preserving the video and other images')
+args = parser.parse_args()
 font_path = os.environ.get('TYPEDEF_FONT') or next(str(p) for p in [Path('/System/Library/Fonts/Menlo.ttc'),Path('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf')] if p.exists())
 font = ImageFont.truetype(font_path, 15)
 COLORS = {'Reset': (215,226,225), 'Green':(100,200,140),'Cyan':(120,210,220),'Red':(245,120,130),'DarkGray':(110,120,130),'Black':(0,0,0)}
@@ -30,8 +33,12 @@ def render(path):
         else: d.text((x,y),ch,font=font,fill=fg)
     return im
 OUT.mkdir(exist_ok=True)
-for name in ['home','typing','results','journey','fern','cobalt','rose','paper','ember']:
+names = args.only or ['home','typing','results','journey','fern','cobalt','rose','paper','ember','moon','carbon','tide','aurora','glacier','lavender','ink', *['mode-'+name for name in ['time','words','quote','endless','zen','daily','weak','custom','code']]]
+for name in names:
     render(Path('/tmp/typedef-site-'+name+'.json')).save(OUT/(name+'.webp'), quality=92)
+if args.only:
+    print('Rendered', len(names), 'app screenshots to', OUT)
+    raise SystemExit(0)
 render(Path('/tmp/typedef-site-home.json')).save(OUT/'dashboard.png',optimize=True)
 ffmpeg = shutil.which('ffmpeg')
 if not ffmpeg:

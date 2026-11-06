@@ -2276,11 +2276,33 @@ mod tests {
             ("rose", 14),
             ("paper", 1),
             ("ember", 5),
+            ("moon", 2),
+            ("carbon", 3),
+            ("tide", 4),
+            ("aurora", 12),
+            ("glacier", 8),
+            ("lavender", 16),
+            ("ink", 9),
         ] {
             a.profile.settings.theme = theme;
             a.screen = Screen::Home;
             terminal.draw(|f| draw(f, &mut a)).unwrap();
             snapshot(&format!("site-{name}"), terminal.backend().buffer());
+        }
+        a.profile.settings.theme = 0;
+        a.custom = "Small steps make steady progress. Take your time, find a comfortable rhythm, and let accuracy lead the way.".into();
+        for (selected, mode) in Mode::ALL.iter().enumerate() {
+            a.selected = selected;
+            a.launch(false);
+            for _ in 0..15 {
+                a.session.input(a.session.target[a.session.typed.len()]);
+            }
+            a.session.tick(3.0);
+            terminal.draw(|f| draw(f, &mut a)).unwrap();
+            snapshot(
+                &format!("site-mode-{mode:?}").to_lowercase(),
+                terminal.backend().buffer(),
+            );
         }
         drop(a);
         std::fs::remove_dir_all(dir).unwrap();

@@ -14,77 +14,87 @@
   <link rel="canonical" href="https://typedef-tui.vercel.app/">
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
   <link rel="preload" href="/assets/fonts/orbitron.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=3">
-  <script src="/app.js?v=3" defer></script>
+  <link rel="preload" href="/assets/fonts/oxanium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=4">
+  <script src="/app.js?v=4" defer></script>
 </head>
 <body id="top">
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav wrap">
   <a class="brand" href="#top" aria-label="typedef home"><span class="brand-mark" aria-hidden="true"></span>typedef<span class="cursor" aria-hidden="true">_</span></a>
-  <nav aria-label="Main navigation"><a href="#practice">Practice</a><a href="#themes">Themes</a><a href="https://github.com/rawatpriyansh17/typedef">GitHub ↗</a></nav>
-  <a class="button small" href="#install">Install <span aria-hidden="true">↗</span></a>
+  <nav aria-label="Main navigation"><a href="#practice">Practice</a><a href="#themes">Themes</a><a class="github-link" aria-label="GitHub repository" href="https://github.com/rawatpriyansh17/typedef"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#github-logo"></use></svg><span>GitHub</span></a></nav>
 </header>
 <main id="main">
 <section class="hero wrap" aria-labelledby="hero-heading">
   <div class="hero-copy">
-    <a class="release-link" href="https://github.com/rawatpriyansh17/typedef/releases/tag/v0.5.2"><span class="key-label">tpdf</span> v0.5.2 <span aria-hidden="true">↗</span></a>
+    <a class="release-link" href="https://github.com/rawatpriyansh17/typedef/releases/tag/v0.5.2"><span class="key-label">tpdf</span> v0.5.2 <svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a>
     <h1 id="hero-heading">Type faster.<br><span>In your terminal.</span></h1>
   </div>
   <div class="hero-summary">
     <p class="intro">A fast, lightweight typing app.<br>Built in Rust. Ready to use offline.</p>
-    <a class="button" href="#install">Install typedef <span aria-hidden="true">↗</span></a>
-    <p class="meta">Free and open source · macOS, Linux, Windows</p>
+    <a class="button" href="#install">Install typedef <svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#download-simple"></use></svg></a>
+    <p class="platforms">macOS · Linux · Windows</p>
   </div>
 </section>
 <section class="demo-section wrap" id="demo" aria-label="App demonstration">
   <div class="terminal">
-    <div class="terminal-bar"><code><span aria-hidden="true">❯ </span>tpdf --mode time --seconds 15</code><span>15 second test</span></div>
-    <video id="demo-video" controls muted loop playsinline preload="metadata" poster="/assets/typing.webp" width="1200" height="720" aria-label="typedef typing practice and results demonstration"><source src="/assets/demo.mp4" type="video/mp4">Your browser cannot play this video. <a href="/assets/demo.mp4">Download the demo</a></video>
+    <div class="terminal-bar"><span class="window-title"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#terminal-window"></use></svg>Typing demo</span><button class="quiet-button" id="motion-toggle" type="button"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#play"></use></svg><span>Play demo</span></button></div>
+    <video id="demo-video" controls muted loop playsinline preload="metadata" poster="/assets/typing.webp" width="1200" height="720" aria-label="Automated capture of typedef typing practice and results"><source src="/assets/demo.mp4" type="video/mp4">Your browser cannot play this video. <a href="/assets/demo.mp4">Download the demo</a></video>
   </div>
-  <div class="demo-caption"><span>Actual app capture · automated demo</span><button class="quiet-button" id="motion-toggle" type="button">Play demo ▷</button></div>
+
 </section>
 <section class="practice wrap section" id="practice" aria-labelledby="practice-heading">
-  <div class="section-intro"><p class="section-label"><span>01</span> Practice</p><h2 id="practice-heading">Choose your<br>next session</h2><p>Run a quick test, train difficult keys, or type your own text.</p><p class="key-hint"><kbd>Enter</kbd> start <kbd>Esc</kbd> home</p></div>
-  <div class="mode-console"><div class="mode-tabs" role="tablist" aria-label="Practice modes">
-    <button id="tab-time" role="tab" aria-selected="true" aria-controls="mode-panel" data-mode="time">Time</button>
-    <button id="tab-words" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="words">Words</button>
-    <button id="tab-quote" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="quote">Quote</button>
-    <button id="tab-endless" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="endless">Endless</button>
-    <button id="tab-zen" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="zen">Zen</button>
-    <button id="tab-daily" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="daily">Daily</button>
-    <button id="tab-weak" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="weak">Weak keys</button>
-    <button id="tab-custom" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="custom">Custom</button>
-    <button id="tab-code" role="tab" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="code">Code</button>
-  </div><div id="mode-panel" role="tabpanel" aria-labelledby="tab-time" tabindex="0"><span id="mode-symbol" aria-hidden="true">◷</span><h3 id="mode-title">Timed practice</h3><p id="mode-description">Choose 15, 30, 60 or 120 seconds. Your first key starts the timer.</p><code id="mode-command">tpdf --mode time --seconds 30</code></div></div>
+  <div class="section-heading"><div><p class="section-label"><span>01</span> Practice</p><h2 id="practice-heading">Choose your practice</h2></div><p>Short tests, focused drills, or an endless session. Find the mode that fits your day.</p></div>
+  <div class="mode-tabs" role="tablist" aria-label="Practice modes">
+    <button id="tab-time" role="tab" type="button" aria-selected="true" aria-controls="mode-panel" tabindex="0" data-mode="time"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#timer"></use></svg><span>Time</span></button>
+    <button id="tab-words" role="tab" type="button" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="words"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#text-t"></use></svg><span>Words</span></button>
+    <button id="tab-quote" role="tab" type="button" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="quote"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#quotes"></use></svg><span>Quotes</span></button>
+    <button id="tab-endless" role="tab" type="button" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="endless"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#infinity"></use></svg><span>Endless</span></button>
+    <button id="tab-zen" role="tab" type="button" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="zen"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#leaf"></use></svg><span>Zen</span></button>
+    <button id="tab-daily" role="tab" type="button" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="daily"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#calendar-dots"></use></svg><span>Daily</span></button>
+    <button id="tab-weak" role="tab" type="button" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="weak"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#crosshair"></use></svg><span>Weak keys</span></button>
+    <button id="tab-custom" role="tab" type="button" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="custom"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#file-text"></use></svg><span>Custom</span></button>
+    <button id="tab-code" role="tab" type="button" aria-selected="false" aria-controls="mode-panel" tabindex="-1" data-mode="code"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#code"></use></svg><span>Code</span></button>
+  </div>
+  <div class="mode-panel" id="mode-panel" role="tabpanel" aria-labelledby="tab-time" tabindex="0">
+    <img id="mode-image" src="/assets/mode-time.webp" alt="Timed typing practice in typedef" width="1200" height="720" loading="lazy">
+    <div class="mode-details"><h3 id="mode-title">Timed practice</h3><p id="mode-description">Choose 15, 30, 60 or 120 seconds. Your first key starts the timer.</p><code id="mode-command">tpdf --mode time --seconds 30</code></div>
+  </div>
 </section>
 <section class="themes-section section" id="themes" aria-labelledby="themes-heading"><div class="wrap">
-  <div class="section-line"><div><p class="section-label"><span>02</span> Appearance</p><h2 id="themes-heading">Pick your palette</h2></div><p class="muted">Five to try here. 28 in the app.</p></div>
+  <div class="section-heading"><div><p class="section-label"><span>02</span> Appearance</p><h2 id="themes-heading">Pick your palette</h2></div><p>From quiet monochrome to vivid color. Choose a theme for the page and app preview.</p></div>
   <div class="theme-switcher" role="group" aria-label="App and website theme">
-    <button type="button" data-theme="fern" aria-pressed="true"><i style="--swatch:#a2e097"></i>Fern</button>
-    <button type="button" data-theme="cobalt" aria-pressed="false"><i style="--swatch:#72b5ff"></i>Cobalt</button>
-    <button type="button" data-theme="rose" aria-pressed="false"><i style="--swatch:#f5a5c7"></i>Rose</button>
-    <button type="button" data-theme="ember" aria-pressed="false"><i style="--swatch:#ffae72"></i>Ember</button>
-    <button type="button" data-theme="paper" aria-pressed="false"><i style="--swatch:#efebe1"></i>Paper</button>
+    <button type="button" data-theme="fern" aria-pressed="true"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#10171d;--swatch-accent:#a2e097;--swatch-second:#88c9d6"><i></i><i></i><i></i></span><span>Fern</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
+    <button type="button" data-theme="cobalt" aria-pressed="false"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#0d1730;--swatch-accent:#72b5ff;--swatch-second:#ffd282"><i></i><i></i><i></i></span><span>Cobalt</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
+    <button type="button" data-theme="rose" aria-pressed="false"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#261a24;--swatch-accent:#f5a5c7;--swatch-second:#c6b3ef"><i></i><i></i><i></i></span><span>Rose</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
+    <button type="button" data-theme="ember" aria-pressed="false"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#211b19;--swatch-accent:#ffae72;--swatch-second:#d2c284"><i></i><i></i><i></i></span><span>Ember</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
+    <button type="button" data-theme="moon" aria-pressed="false"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#191724;--swatch-accent:#c4a7e7;--swatch-second:#9ccfd8"><i></i><i></i><i></i></span><span>Moon</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
+    <button type="button" data-theme="carbon" aria-pressed="false"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#181a1d;--swatch-accent:#e8bd55;--swatch-second:#7bbbd1"><i></i><i></i><i></i></span><span>Carbon</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
+    <button type="button" data-theme="tide" aria-pressed="false"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#0e2029;--swatch-accent:#67d7d0;--swatch-second:#83b7ff"><i></i><i></i><i></i></span><span>Tide</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
+    <button type="button" data-theme="aurora" aria-pressed="false"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#102321;--swatch-accent:#78e6b1;--swatch-second:#b7a1ed"><i></i><i></i><i></i></span><span>Aurora</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
+    <button type="button" data-theme="ink" aria-pressed="false"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#101010;--swatch-accent:#ffffff;--swatch-second:#b5c4d2"><i></i><i></i><i></i></span><span>Ink</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
+    <button type="button" data-theme="paper" aria-pressed="false"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#efebe1;--swatch-accent:#26745c;--swatch-second:#526ea3"><i></i><i></i><i></i></span><span>Paper</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
+    <button type="button" data-theme="glacier" aria-pressed="false"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#e8f0f4;--swatch-accent:#276eab;--swatch-second:#7569b7"><i></i><i></i><i></i></span><span>Glacier</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
+    <button type="button" data-theme="lavender" aria-pressed="false"><span class="palette-swatch" aria-hidden="true" style="--swatch-bg:#f0eaf5;--swatch-accent:#7448a2;--swatch-second:#346d85"><i></i><i></i><i></i></span><span>Lavender</span><svg class="icon selected-mark" aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg></button>
   </div>
-  <figure class="theme-stage"><img id="theme-image" src="/assets/fern.webp" alt="typedef dashboard in the Fern theme" width="1200" height="720" loading="lazy"><figcaption id="theme-caption">Fern · app capture</figcaption></figure>
+  <figure class="theme-stage"><div class="terminal-bar"><span class="window-title"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#terminal-window"></use></svg><span id="theme-current" aria-live="polite">Fern theme</span></span><span class="theme-applied"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#check"></use></svg>Selected</span></div><img id="theme-image" src="/assets/fern.webp" alt="typedef dashboard in the Fern theme" width="1200" height="720" loading="lazy"></figure>
 </div></section>
 <section class="journey wrap section" aria-labelledby="journey-heading">
-  <div class="journey-copy"><p class="section-label"><span>03</span> Progress</p><h2 id="journey-heading">Watch your<br>practice add up</h2><p>Track personal records, accuracy and daily streaks. Keep earning levels and new badge tiers.</p><p class="meta">Your history stays on your machine</p></div>
-  <figure class="journey-image"><img src="/assets/journey.webp" alt="typedef Journey with six repeating badge tracks and progress toward the next tiers" width="1200" height="720" loading="lazy"><figcaption>Six badge tracks, with no final tier</figcaption></figure>
+  <div class="journey-copy"><p class="section-label"><span>03</span> Progress</p><h2 id="journey-heading">Watch your<br>practice add up</h2><p>Beat your personal records, build a daily streak, and grow through six badge tracks with no final tier.</p></div>
+  <figure class="journey-image"><img src="/assets/journey.webp" alt="typedef Journey with six repeating badge tracks and progress toward the next tiers" width="1200" height="720" loading="lazy"></figure>
 </section>
 <section class="install section" id="install" aria-labelledby="install-heading"><div class="wrap install-inner">
-  <div><p class="section-label"><span>04</span> Install</p><h2 id="install-heading">One command.<br>Then <span class="accent">tpdf</span></h2><p>Prebuilt binaries. No Rust toolchain needed.</p><a class="text-link" href="https://github.com/rawatpriyansh17/typedef/releases/latest">Windows ZIPs and all downloads ↗</a></div>
+  <div><p class="section-label"><span>04</span> Install</p><h2 id="install-heading">One command.<br>Then <span class="accent">tpdf</span></h2><p>Prebuilt binaries. No Rust toolchain needed.</p><a class="text-link" href="https://github.com/rawatpriyansh17/typedef/releases/latest">Windows ZIPs and all downloads <svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a></div>
   <div class="install-box">
     <div class="install-methods" role="group" aria-label="Installation method"><button type="button" data-install="curl" aria-pressed="true">curl</button><button type="button" data-install="brew" aria-pressed="false">Homebrew</button><button type="button" data-install="cargo" aria-pressed="false">Cargo</button></div>
-    <div class="command-label"><span id="install-platform">macOS + Linux</span><button type="button" id="copy-command" aria-label="Copy installation command">Copy</button></div>
+    <div class="command-label"><span id="install-platform">macOS + Linux</span><button type="button" id="copy-command" aria-label="Copy installation command"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#copy"></use></svg><span>Copy</span></button></div>
     <pre><code id="install-command">curl -fsSL https://typedef-tui.vercel.app/install.sh | sh</code></pre>
     <p id="install-note">Verifies SHA-256 and installs to ~/.local/bin. No sudo or shell profile changes.</p>
-    <div class="install-next"><span>Start a session</span><code>tpdf <span aria-hidden="true">↵</span></code></div>
+    <div class="install-next"><span>Start a session</span><code>tpdf</code></div>
     <p id="copy-status" role="status" aria-live="polite"></p>
   </div>
 </div></section>
 </main>
-<footer class="wrap"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>typedef</a><span>Rust + Ratatui</span><div><a href="https://github.com/rawatpriyansh17/typedef">Source ↗</a><a href="https://github.com/rawatpriyansh17/typedef/blob/main/CONTRIBUTING.md">Contribute ↗</a><a href="https://github.com/rawatpriyansh17/typedef/blob/main/LICENSE">MIT</a></div></footer>
+<footer class="wrap"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>typedef</a><span>Free and open source</span><div><a href="https://github.com/rawatpriyansh17/typedef"><svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#github-logo"></use></svg>GitHub</a><a href="https://github.com/rawatpriyansh17/typedef/blob/main/CONTRIBUTING.md">Contribute <svg class="icon " aria-hidden="true"><use href="/assets/icons.svg#arrow-up-right"></use></svg></a><a href="https://github.com/rawatpriyansh17/typedef/blob/main/LICENSE">MIT</a></div></footer>
 </body>
 </html>
