@@ -2,7 +2,12 @@ import {readFile,access} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const html = await readFile('index.html','utf8');
 const js = await readFile('app.js','utf8');
-for (const match of html.matchAll(/(?:src|href|poster)="(\/[^"#]+)"/g)) await access(`.${match[1].split('?')[0]}`);
+for (const match of html.matchAll(/(?:src|href|poster)="(\/[^"#]+)"/g)) {
+  const path = match[1].split('?')[0];
+  // Skip Vercel Analytics script - it's served by Vercel's infrastructure when deployed
+  if (path === '/_vercel/insights/script.js') continue;
+  await access(`.${path}`);
+}
 for (const theme of ['fern','paper','cobalt','rose','ember','moon','carbon','tide','aurora','glacier','lavender','ink']) await access(`assets/${theme}.webp`);
 assert.equal([...html.matchAll(/role="tab"/g)].length,9);
 for (const mode of ['time','words','quote','endless','zen','daily','weak','custom','code']) await access(`assets/mode-${mode}.webp`);
