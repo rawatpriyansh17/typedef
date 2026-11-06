@@ -9,7 +9,7 @@ base = f"https://github.com/rawatpriyansh17/typedef/releases/download/v{version}
 lines = [
     "class Typedef < Formula",
     '  desc "Fast, lightweight terminal typing practice"',
-    '  homepage "https://typedef-tui.vercel.app"',
+    '  homepage "https://typedef-cli.vercel.app"',
     f'  version "{version}"',
     '  license "MIT"',
     "",

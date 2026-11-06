@@ -8,7 +8,7 @@ I built typedef to improve my typing speed: a fast, lightweight terminal app in 
 
 Works offline. Free and open source. Feel free to try it, share feedback, star it on GitHub, or contribute!
 
-https://typedef-tui.vercel.app
+https://typedef-cli.vercel.app
 https://github.com/rawatpriyansh17/typedef
 
 ## LinkedIn
@@ -29,18 +29,18 @@ There are also 28 themes, daily streaks and repeating badge tiers to keep practi
 
 Feel free to try it out! I'd appreciate feedback on the typing experience and terminal compatibility. If you find it useful, give it a star on GitHub. Contributions to the Rust codebase are welcome too.
 
-Try it: https://typedef-tui.vercel.app
+Try it: https://typedef-cli.vercel.app
 Source: https://github.com/rawatpriyansh17/typedef
 
 ## College WhatsApp group
 
 Hey everyone! I made typedef to improve my typing speed. It's a free terminal typing app that works offline. Feel free to try it, star it on GitHub, or contribute. Feedback is welcome!
 
-Try it: https://typedef-tui.vercel.app
+Try it: https://typedef-cli.vercel.app
 GitHub: https://github.com/rawatpriyansh17/typedef
 
 ## Social image
 
-- [Download the PNG](../website/assets/og-typedef-v1.png)
-- Public URL: https://typedef-tui.vercel.app/assets/og-typedef-v1.png
+- [Download the PNG](../website/assets/og-typedef-v2.png)
+- Public URL: https://typedef-cli.vercel.app/assets/og-typedef-v2.png
 - [Generation brief and prompt](SOCIAL_IMAGE.md)

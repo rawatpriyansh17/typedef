@@ -5,7 +5,7 @@ This release adds prebuilt binaries for macOS (Apple Silicon and Intel), Linux (
 The macOS/Linux shell installer verifies the release SHA-256 before extraction and installs to `~/.local/bin` without sudo or shell-profile changes. Install with:
 
 ```sh
-curl -fsSL https://typedef-tui.vercel.app/install.sh | sh
+curl -fsSL https://typedef-cli.vercel.app/install.sh | sh
 # Or use the project's Homebrew tap:
 brew install rawatpriyansh17/tap/typedef
 ```

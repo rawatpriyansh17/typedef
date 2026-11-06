@@ -6,14 +6,14 @@ Practice offline, build a daily habit, and track your speed and accuracy. **v0.5
 
 ![typedef dashboard with personal records, practice modes and daily quests](website/assets/dashboard.png)
 
-[Website](https://typedef-tui.vercel.app) · [Contributing](CONTRIBUTING.md) · [Product research](docs/SOURCE_REVIEW.md)
+[Website](https://typedef-cli.vercel.app) · [Contributing](CONTRIBUTING.md) · [Product research](docs/SOURCE_REVIEW.md)
 
 ## Get started
 
 ### macOS and Linux — one command
 
 ```sh
-curl -fsSL https://typedef-tui.vercel.app/install.sh | sh
+curl -fsSL https://typedef-cli.vercel.app/install.sh | sh
 ```
 
 Then run `tpdf`. Both `tpdf` and `typedef` open the same app and share your profile.
@@ -27,7 +27,7 @@ export PATH="$HOME/.local/bin:$PATH"
 To choose another directory or pin a release:
 
 ```sh
-curl -fsSL https://typedef-tui.vercel.app/install.sh | sh -s -- --bin-dir "$HOME/bin" --version v0.5.2
+curl -fsSL https://typedef-cli.vercel.app/install.sh | sh -s -- --bin-dir "$HOME/bin" --version v0.5.2
 ```
 
 Re-run the install command to update. Remove the two installed executables to uninstall; your saved profile remains untouched.

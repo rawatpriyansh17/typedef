@@ -23,7 +23,7 @@ const installer = await readFile('../scripts/install.sh','utf8');
 const version = JSON.parse(await readFile('package.json','utf8')).version;
 assert(installer.includes(`TYPEDEF_VERSION:-v${version}`),'Website and installer versions must match');
 assert(html.includes(`releases/tag/v${version}`),'Release link must match the package version');
-assert(html.includes('https://typedef-tui.vercel.app/install.sh | sh'));
+assert(html.includes('https://typedef-cli.vercel.app/install.sh | sh'));
 assert(js.includes('brew install rawatpriyansh17/tap/typedef'));
 assert(!/No browser required/i.test(html));
 assert(!/TODO|lorem ipsum|placeholder/i.test(html));

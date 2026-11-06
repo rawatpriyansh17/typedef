@@ -53,7 +53,7 @@ let savedTheme = 'fern';
 try { savedTheme = localStorage.getItem('typedef-theme') || savedTheme; } catch { /* Use the default palette. */ }
 applyTheme(savedTheme);
 const installMethods = {
-  curl: ['curl -fsSL https://typedef-tui.vercel.app/install.sh | sh', 'macOS + Linux', 'Verifies SHA-256 and installs to ~/.local/bin. No sudo or shell profile changes.'],
+  curl: ['curl -fsSL https://typedef-cli.vercel.app/install.sh | sh', 'macOS + Linux', 'Verifies SHA-256 and installs to ~/.local/bin. No sudo or shell profile changes.'],
   brew: ['brew install rawatpriyansh17/tap/typedef', 'macOS + Linux · Homebrew', 'Installs both commands. Update later with brew upgrade typedef.'],
   cargo: ['cargo install --git https://github.com/rawatpriyansh17/typedef --locked', 'All platforms · Rust required', 'Builds from source with Cargo. Use curl or Homebrew for prebuilt binaries.']
 };
