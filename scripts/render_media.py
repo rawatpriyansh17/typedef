@@ -30,7 +30,7 @@ def render(path):
         else: d.text((x,y),ch,font=font,fill=fg)
     return im
 OUT.mkdir(exist_ok=True)
-for name in ['home','typing','results','journey','fern','cobalt','rose','paper']:
+for name in ['home','typing','results','journey','fern','cobalt','rose','paper','ember']:
     render(Path('/tmp/typedef-site-'+name+'.json')).save(OUT/(name+'.webp'), quality=92)
 render(Path('/tmp/typedef-site-home.json')).save(OUT/'dashboard.png',optimize=True)
 ffmpeg = shutil.which('ffmpeg')

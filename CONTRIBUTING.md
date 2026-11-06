@@ -26,7 +26,6 @@ Rust compiles the source into one native executable. Cargo is its build, depende
 - `src/theme.rs` and `src/settings.rs`: palettes and settings metadata/actions.
 - `src/progression.rs`: rank cycles, repeatable badge tracks, badges and daily quests; reward accounting lives in `store.rs`.
 - `assets/english.txt`: bundled vocabulary.
-- `website/`: independent static landing page; its README covers development and Vercel.
 - `scripts/pty_smoke.py`: real Unix terminal integration checks.
 - `scripts/render_media.py`: turn deterministic Ratatui captures into website images and video.
 
@@ -37,7 +36,5 @@ To contribute text, write it yourself or provide its source and redistribution l
 Do not commit profiles, private text, binaries, or downloaded practice files. Preserve existing user data on parse and write errors. Networking must require an explicit action and work outside the input/rendering loop.
 
 ## Community
-
-Website contributors: use Node.js 20+ and Python 3. Run `cd website && npm ci && npm run build`, then `npm run dev` to preview. Check phone and desktop layouts, keyboard navigation, visible focus and reduced-motion behavior. Use genuine app captures; keep copy concise. The app and website build independently.
 
 Be welcoming, patient, and specific. Critique ideas and code, not people. Harassment and disclosure of another person's private information are not acceptable. Maintainers may remove abusive contributions. Security reports should omit private profile data and executable exploit payloads from public issues.

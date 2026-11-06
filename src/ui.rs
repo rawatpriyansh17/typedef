@@ -2270,7 +2270,13 @@ mod tests {
         a.profile_tab = 5;
         terminal.draw(|f| draw(f, &mut a)).unwrap();
         snapshot("site-journey", terminal.backend().buffer());
-        for (name, theme) in [("fern", 0), ("cobalt", 13), ("rose", 14), ("paper", 1)] {
+        for (name, theme) in [
+            ("fern", 0),
+            ("cobalt", 13),
+            ("rose", 14),
+            ("paper", 1),
+            ("ember", 5),
+        ] {
             a.profile.settings.theme = theme;
             a.screen = Screen::Home;
             terminal.draw(|f| draw(f, &mut a)).unwrap();

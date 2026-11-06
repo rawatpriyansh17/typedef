@@ -30,15 +30,26 @@ tabs.forEach((tab,index) => {
     if (next !== undefined) { event.preventDefault(); selectMode(tabs[next]); tabs[next].focus(); }
   });
 });
-const palettes = {fern:['Fern','01'],cobalt:['Cobalt','14'],rose:['Rose','15'],paper:['Paper','02']};
-document.querySelectorAll('[data-theme]').forEach(button => button.addEventListener('click', () => {
-  document.querySelectorAll('[data-theme]').forEach(b => b.setAttribute('aria-pressed',String(b === button)));
-  const key = button.dataset.theme, [name,number] = palettes[key];
+const palettes = {fern:['Fern','01'],cobalt:['Cobalt','14'],rose:['Rose','15'],ember:['Ember','06'],paper:['Paper','02']};
+const themeButtons = [...document.querySelectorAll('[data-theme]')];
+function applyTheme(key, remember = false) {
+  if (!Object.hasOwn(palettes, key)) key = 'fern';
+  document.documentElement.dataset.palette = key;
+  themeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.theme === key)));
+  const [name,number] = palettes[key];
   const image = document.querySelector('#theme-image');
   image.src = `/assets/${key}.webp`;
   image.alt = `typedef dashboard in the ${name} theme`;
   document.querySelector('#theme-caption').textContent = `${name.toUpperCase()} / ${number} — Actual app capture`;
-}));
+  document.querySelector('meta[name="theme-color"]').content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+  if (remember) {
+    try { localStorage.setItem('typedef-theme', key); } catch { /* Storage may be disabled. */ }
+  }
+}
+themeButtons.forEach(button => button.addEventListener('click', () => applyTheme(button.dataset.theme, true)));
+let savedTheme = 'fern';
+try { savedTheme = localStorage.getItem('typedef-theme') || savedTheme; } catch { /* Use the default palette. */ }
+applyTheme(savedTheme);
 document.querySelector('#copy-command').addEventListener('click', async () => {
   const command = document.querySelector('#install-command').textContent;
   try {

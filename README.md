@@ -6,7 +6,7 @@ Practice between commits, build a daily habit, and watch your typing improve. No
 
 ![typedef dashboard with personal records, practice modes and daily quests](website/assets/dashboard.png)
 
-[Contributing](CONTRIBUTING.md) · [Website and Vercel deployment](website/README.md) · [Product research](docs/SOURCE_REVIEW.md)
+[Contributing](CONTRIBUTING.md) · [Product research](docs/SOURCE_REVIEW.md)
 
 ## Get started
 
@@ -142,12 +142,6 @@ The **Journey** (`g`) has six repeating badge tracks. Every tier opens another i
 These tracks use the same ten-second / 25-correct-character qualification rule as quests. Ritual counts distinct active dates, not a streak, so a missed day does not erase progress. Tiers are derived from saved history: v0.3 qualifying records count toward your collection, while XP is awarded only for thresholds crossed by new runs. Older records without qualification metadata remain in history and PRs but do not count toward tracks. Rewards are included in each session's XP; restarting the app does not pay old tiers again.
 
 Home compares the last five successful runs against the previous five with matching settings once ten exist. Result screens compare against the previous PR; failed runs never replace a record.
-
-## Repository and website
-
-The app and landing page share this repository so screenshots, docs and releases can stay in sync. Rust source lives in `src/`; the independent static website lives in `website/`. No Node.js tooling is needed to build or run the terminal app. The website has no runtime dependencies, account service or analytics.
-
-For Vercel, import this GitHub repository and set **Root Directory to `website`**, **Framework Preset to Other**, **Build Command to `npm run build`**, and **Output Directory to `dist`**. No environment variables are required. See [website/README.md](website/README.md) for local preview, deployment and regenerating the real app images/video.
 
 ## Development
 
